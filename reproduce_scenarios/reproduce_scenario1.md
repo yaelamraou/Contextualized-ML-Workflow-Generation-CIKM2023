@@ -1,6 +1,5 @@
 # Overview
 
-The goal is for you to reproduce the scenario 1 depicted in the _section 5.2_ of the article.
 With this scenario, we want to evaluate how our approach differentiate itself from a keyword-based search.
 
 Detailed steps are given to you in order to replicate each step of the scenario.
