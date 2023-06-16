@@ -1,6 +1,5 @@
 # Overview
 
-The goal is for you to reproduce the scenario depicted in the _section 5.4_ of the article.
 With this scenario, we want to evaluate the correctness of the generative process, from the proposed code artifacts to the generated Notebook, focusing on the scenario where no previous experiment or solution is available after the configuration process.
 
 Detailed steps are given to you in order to replicate each step of the scenario.
