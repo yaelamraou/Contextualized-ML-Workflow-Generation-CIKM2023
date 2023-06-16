@@ -1,6 +1,5 @@
 # Overview
 
-The goal is for you to reproduce the scenario depicted in the _section 5.3_ of the article.
 With this scenario, we aim to evaluate how our approach, through its configuration and generation capabilities, helps the user to compose a solution that experiments only partially cover.
 Detailed steps are given to you in order to replicate each step of the scenario.
 
