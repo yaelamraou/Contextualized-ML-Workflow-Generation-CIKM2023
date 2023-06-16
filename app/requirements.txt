@@ -1,0 +1,5 @@
+fastapi
+pydantic
+nbformat==5.8.0
+uvicorn
+xmltodict

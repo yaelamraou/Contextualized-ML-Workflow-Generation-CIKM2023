@@ -1,0 +1,32 @@
+{
+  "Train": [
+    "# Data treatment\n",
+    "# Normalization/MinMaxScaler\n",
+    "\n",
+    "def scaler_train(obj, x_data):\n",
+    "    obj.fit(x_data)\n",
+    "    return obj.transform(x_data)\n",
+    "\n",
+    "scaler = MinMaxScaler()\n",
+    "x_train = scaler_train(scaler, x_train)"
+  ],
+  "Valid": [
+    "# Data treatment\n",
+    "# Normalization/MinMaxScaler\n",
+    "\n",
+    "def scaler_valid(obj, x_data):\n",
+    "    return obj.transform(x_data)\n",
+    "\n",
+    "x_valid = scaler_valid(scaler, x_valid)"
+  ],
+  "Test": [
+    "# Data treatment\n",
+    "# Normalization/MinMaxScaler\n",
+    "\n",
+    "def scaler_test(obj, x_data):\n",
+    "    return obj.transform(x_data)\n",
+    "\n",
+    "x_test = scaler_test(scaler, x_test)"
+  ],
+  "Imports": ["from sklearn.preprocessing import MinMaxScaler\n"]
+}

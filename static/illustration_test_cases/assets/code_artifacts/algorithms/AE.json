@@ -1,0 +1,45 @@
+{
+  "Train": [
+    "# Model training\n",
+    "# Algo/AE\n",
+    "\n",
+    "def nn_train(obj, x_train, x_valid = None):\n",
+    "    if x_valid is not None:\n",
+    "        return obj.fit(x_train, x_train,\n",
+    "                    epochs=100,\n",
+    "                    batch_size=256,\n",
+    "                    shuffle=True,\n",
+    "                    validation_data=(x_valid, x_valid))\n",
+    "    else:\n",
+    "        return obj.fit(x_train, x_train,\n",
+    "                    epochs=100,\n",
+    "                    batch_size=256,\n",
+    "                    shuffle=True)\n",
+    "\n",
+    "input_dim = x_train.shape[1]\n",
+    "encoding_dim = 32\n",
+    "autoencoder = AutoEncoder(input_dim, encoding_dim)\n",
+    "model = nn_train(autoencoder, x_train, x_valid)\n"
+  ],
+  "Valid": [
+    "# Validation Prediction\n",
+    "# Algo/AE\n",
+    "\n",
+    "def detect_anomalies_autoencoder(obj, x_test, sigma):\n",
+    "    predicted = obj.predict(x_test)\n",
+    "    errors = np.sum((x_test-predicted)**2, axis = 1)\n",
+    "    median_err,std_err = np.median(errors), np.std(errors)\n",
+    "    threshold = median_err+sigma*std_err\n",
+    "    anomalies = -errors + threshold\n",
+    "    return [i for i,a in enumerate(anomalies) if a < 0]\n",
+    "\n",
+    "anomalies_indexes_valid = detect_anomalies_autoencoder(autoencoder, x_valid, 3)\n"
+  ],
+  "Test": [
+    "# Prediction\n",
+    "# Algo/AE\n",
+    "\n",
+    "anomalies_indexes = detect_anomalies_autoencoder(autoencoder, x_test, 3)\n"
+  ],
+  "Imports": ["import numpy as np\n", "from keras import Input, layers\n"]
+}

@@ -1,0 +1,31 @@
+{
+  "Train": [
+    "# Model training\n",
+    "# Algo/SVM\n",
+    "\n",
+    "def clf_train(obj, x_data, y_data):\n",
+    "    return obj.fit(x_data, y_data)\n",
+    "\n",
+    "clf = svm.SVC(kernel=\"poly\", degree=3, gamma=\"auto\", C=1)\n",
+    "model = clf_train(clf, x_train, y_train)"
+  ],
+  "Valid": [
+    "# Prediction\n",
+    "# Algo/SVM\n",
+    "\n",
+    "def clf_predict(obj, x_data):\n",
+    "    return obj.predict(x_data)\n",
+    "\n",
+    "y_pred_valid = clf_predict(clf, x_valid)"
+  ],
+  "Test": [
+    "# Prediction\n",
+    "# Algo/SVM\n",
+    "\n",
+    "def clf_predict(obj, x_data):\n",
+    "    return obj.predict(x_data)\n",
+    "\n",
+    "y_pred = clf_predict(clf, x_test)"
+  ],
+  "Imports": ["from sklearn import svm\n"]
+}

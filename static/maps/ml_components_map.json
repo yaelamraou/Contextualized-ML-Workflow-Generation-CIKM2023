@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "last_generation": "2023-05-02",
+    "features_count": 18,
+    "know_count": 12,
+    "unkonwn_count": 5
+  },
+  "features": {
+    "CNN": {
+      "known": true,
+      "dir": "algorithms",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/algorithms/CNN.json"
+    },
+    "IsolationForest": {
+      "known": true,
+      "dir": "algorithms",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/algorithms/IsolationForest.json"
+    },
+    "SVM": {
+      "known": true,
+      "dir": "algorithms",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/algorithms/SVM.json"
+    },
+    "LSTMAE": {
+      "known": true,
+      "dir": "algorithms",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/algorithms/LSTMAE.json"
+    },
+    "AE": {
+      "known": true,
+      "dir": "algorithms",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/algorithms/AE.json"
+    },
+    "ResNet": {
+      "known": true,
+      "dir": "algorithms",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/algorithms/ResNet.json"
+    },
+    "OCSVM": {
+      "known": true,
+      "dir": "algorithms",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/algorithms/OCSVM.json"
+    },
+    "RandomForest": {
+      "known": true,
+      "dir": "algorithms",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/algorithms/RandomForest.json"
+    },
+    "RobustScaler": {
+      "known": true,
+      "dir": "preprocessings",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/preprocessings/RobustScaler.json"
+    },
+    "MinMaxScaler": {
+      "known": true,
+      "dir": "preprocessings",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/preprocessings/MinMaxScaler.json"
+    },
+    "StandardScaler": {
+      "known": true,
+      "dir": "preprocessings",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/preprocessings/StandardScaler.json"
+    },
+    "QuantizeNN": {
+      "known": true,
+      "dir": "postprocessings",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/postprocessings/QuantizeNN.json"
+    },
+    "MissingDataArtifacts": {
+      "known": true,
+      "dir": "template",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/template/MissingDataArtifacts.json"
+    },
+    "augmentation": {
+      "known": false,
+      "dir": "Unknown",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/template/MissingDataArtifacts.json"
+    },
+    "Decimation": {
+      "known": false,
+      "dir": "Unknown",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/template/MissingDataArtifacts.json"
+    },
+    "removal": {
+      "known": false,
+      "dir": "Unknown",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/template/MissingDataArtifacts.json"
+    },
+    "CNNAE": {
+      "known": false,
+      "dir": "Unknown",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/template/MissingDataArtifacts.json"
+    },
+    "decisionTree": {
+      "known": false,
+      "dir": "Unknown",
+      "path": "./static/illustration_test_cases/assets/code_artifacts/template/MissingDataArtifacts.json"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "Train": {
+    "dataTreatment": [],
+    "modelTraining": []
+  },
+  "Valid": {
+    "dataTreatment": [],
+    "prediction": [],
+    "evaluation": []
+  },
+  "Test": {
+    "dataTreatment": [],
+    "prediction": [],
+    "evaluation": []
+  }
+}

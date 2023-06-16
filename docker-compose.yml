@@ -1,0 +1,10 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    image: splc-artifact
+    container_name: splc-application
+    ports:
+      - '5050:5000'
+    restart: "no"

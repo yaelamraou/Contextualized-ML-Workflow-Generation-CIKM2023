@@ -1,0 +1,23 @@
+{
+  "Train": [],
+  "Valid": [
+    "# Validation\n",
+    "# postprocessing/QuantizeNN\n",
+    "\n",
+    "def convert_model(model):\n",
+    "    converter = tf.lite.TFLiteConverter.from_keras_model(model)\n",
+    "    tflite_model = converter.convert()\n",
+    "    return tflite_model\n",
+    "\n",
+    "# replace model parameter with your keras model\n",
+    "valid_result = convert_model(model)\n"
+  ],
+  "Test": [
+    "# Test\n",
+    "# postprocessing/QuantizeNN\n",
+    "\n",
+    "# replace model parameter with your keras model\n",
+    "result = convert_model(model)\n"
+  ],
+  "Imports": ["import tensorflow as tf\n"]
+}

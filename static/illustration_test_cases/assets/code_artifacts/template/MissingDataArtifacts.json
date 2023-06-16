@@ -1,0 +1,39 @@
+{
+  "Train": [
+    "# Data treatment\n",
+    "# <To complete> Treatment/Name [Normalization/RobustScaler, Augmentation/Smote, ...]\n",
+    "\n",
+    "# <To modify>\n",
+    "def object_train(obj, x_data):\n",
+    "   obj.fit(x_data)\n",
+    "   return obj.transform(x_data)\n",
+    "\n",
+    "# <To modify>\n",
+    "object = class_constructor()\n",
+    "# <To modify>\n",
+    "x_train = object_train(objet, x_train)"
+  ],
+  "Valid": [
+    "# Data treatment\n",
+    "# <To complete> Treatment/Name [Normalization/RobustScaler, Augmentation/Smote, ...]\n",
+    "\n",
+    "# <To modify>\n",
+    "def object_valid(obj, x_data):\n",
+    "    return obj.transform(x_data)\n",
+    "\n",
+    "# <To modify>\n",
+    "x_valid = object_valid(transformer x_val)"
+  ],
+  "Test": [
+    "# Data treatment\n",
+    "# <To complete> Treatment/Name [Normalization/RobustScaler, Augmentation/Smote, ...]\n",
+    "\n",
+    "# <To modify>\n",
+    "def object_test(obj, x_data):\n",
+    "    return obj.transform(x_data)\n",
+    "\n",
+    "# <To modify>\n",
+    "x_test = object_test(transformer, x_test)"
+  ],
+  "Imports": ["# <To modify> add the correct import for your treatment\n"]
+}

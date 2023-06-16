@@ -1,0 +1,97 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 12px;
+  font-size: 17px;
+  width: 14.286%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the tab content */
+.tabcontent {
+  color: black;
+  display: none;
+  padding: 50px;
+  /* text-align: center;*/
+}
+
+/* Style each tab content individually */
+/* TODO : Complete it */
+#Admin {
+  background-color: #f7f4eb;
+}
+
+#InitialData {
+  background-color: #f5efd5;
+}
+
+#InitialProblem {
+  background-color: #e1eded;
+}
+
+/* Large rounded green border */
+hr.new5 {
+  border: 10px solid darkslategrey;
+  border-radius: 5px;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.buttonImportant {
+  background-color: whitesmoke;
+  color: black;
+  border: 2px solid #008cba;
+}
+
+.buttonImportant:hover {
+  background-color: darkslategrey;
+  color: white;
+}
+
+.comment {
+  /*  background-color: #d3c1c1;
+          border: 2px solid #93adb4;
+         */
+  font-style: italic;
+}
+
+.Global {
+  text-align: center;
+  border: 1px solid darkslategrey;
+  width: 100%;
+  padding: 10px;
+  display: block;
+  background-color: #d4d9d9;
+  overflow: scroll;
+  scrollbar-color: #7d3c98 #d7bde2;
+}

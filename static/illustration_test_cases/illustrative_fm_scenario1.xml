@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<featureModel>
+	<properties>
+		<graphics key="autolayoutconstraints" value="false"/>
+		<graphics key="legendautolayout" value="true"/>
+		<graphics key="showconstraints" value="true"/>
+		<graphics key="showshortnames" value="false"/>
+		<graphics key="layout" value="vertical"/>
+		<graphics key="showcollapsedconstraints" value="true"/>
+		<graphics key="legendhidden" value="false"/>
+		<graphics key="layoutalgorithm" value="4"/>
+	</properties>
+	<struct>
+		<and abstract="true" mandatory="true" name="knowledgeBase">
+			<and abstract="true" name="InitialProblem">
+				<graphics key="collapsed" value="false"/>
+				<and abstract="true" name="Special_deploy_plateform">
+					<feature name="microcontroller"/>
+				</and>
+				<and abstract="true" name="eventualAnomaliesInProduction">
+					<feature name="NovelAnomaliesEmergeInProd"/>
+				</and>
+				<and abstract="true" name="AnomalyType">
+					<feature name="pointAnomaly"/>
+					<feature name="patternAnomaly"/>
+					<feature name="GlobalAnomaly"/>
+				</and>
+			</and>
+			<and abstract="true" name="InitialData">
+				<graphics key="collapsed" value="true"/>
+				<alt abstract="true" name="LabelsAvailability">
+					<feature name="FullyLabelled"/>
+					<feature name="PartiallyLabelled"/>
+					<feature name="Unlabelled"/>
+				</alt>
+				<alt abstract="true" name="DataType">
+					<feature name="TimeSeries"/>
+					<and abstract="true" name="Images">
+						<feature name="Spectrograms"/>
+					</and>
+				</alt>
+				<feature name="NormalizedData"/>
+			</and>
+			<and abstract="true" name="Solution">
+				<graphics key="collapsed" value="true"/>
+				<and abstract="true" name="PreProcessings">
+					<feature name="SFFT_createSpectrograms"/>
+					<alt abstract="true" name="NormalizeData">
+						<feature name="StandardScaler"/>
+						<feature name="MinMaxScaler"/>
+						<feature name="RobustScaler"/>
+					</alt>
+					<alt abstract="true" name="LabelsProcessing">
+						<feature name="augmentation"/>
+						<feature name="Decimation"/>
+						<feature name="removal"/>
+					</alt>
+				</and>
+				<alt abstract="true" name="Algorithms">
+					<alt abstract="true" name="NeuralNetworks">
+						<feature name="CNNAE"/>
+						<feature name="CNN"/>
+						<feature name="ResNet"/>
+						<feature name="LSTMAE"/>
+						<feature name="AE"/>
+					</alt>
+					<alt abstract="true" name="SupportVectorMachines">
+						<feature name="SVM"/>
+						<feature name="OCSVM"/>
+					</alt>
+					<alt abstract="true" name="TreeBased">
+						<feature name="decisionTree"/>
+						<feature name="RandomForest"/>
+						<feature name="IsolationForest"/>
+					</alt>
+				</alt>
+				<and abstract="true" name="PostProcessings">
+					<feature name="QuantizeNN"/>
+				</and>
+			</and>
+			<feature abstract="true" name="Sources"/>
+			<and abstract="true" name="states">
+				<graphics key="collapsed" value="true"/>
+				<alt abstract="true" name="LabelsAvailabilityState">
+					<feature name="FullyLabelledState"/>
+					<feature name="PartiallyLabelledState"/>
+					<feature name="UnlabelledState"/>
+				</alt>
+				<alt abstract="true" name="DataTypeState">
+					<feature name="TimeSeriesState"/>
+					<and abstract="true" name="ImagesState">
+						<feature name="SpectrogramState"/>
+					</and>
+				</alt>
+				<feature name="NormalizedDataState"/>
+			</and>
+			<and abstract="true" name="Application">
+				<and abstract="true" name="DataSet">
+					<graphics key="collapsed" value="false"/>
+					<feature name="DS1_motor_vibration_acquisition_error"/>
+					<feature name="DS2_electrical_engine_sound_anomaly_detection"/>
+					<!-- <feature name="DS3_motor_vibrations_bearing_defect"/>
+					<feature name="DS4_washing_machine_engine"/>
+					<feature name="wafer_manufacturing_DS"/> -->
+				</and>
+				<and abstract="true" name="XP">
+					<graphics key="collapsed" value="false"/>
+					<feature name="XP1_motor_vibration_acquisition_error"/>
+					<feature name="XP2_electrical_engine_sound_anomaly_detection"/>
+					<!-- <feature name="XP3_motor_vibrations_bearing_defect"/>
+					<feature name="XP4_washing_machine_engine_defect"/>
+					<feature name="Wafer_manufacturing_anomaly_detection_APP"/> -->
+				</and>
+				<and abstract="true" name="Notebooks">
+					<graphics key="collapsed" value="false"/>
+					<feature name="NB1_motor_vibration_acquisition_error"/>
+					<feature name="NB2_electrical_engine_sound_anomaly_detection"/>
+					<!-- <feature name="NB3_motor_vibrations_bearing_defect"/>
+					<feature name="washing_machine_defect_NB"/>
+					<feature name="wafer_manufacturing_anomaly_detection_NB"/> -->
+				</and>
+			</and>
+		</and>
+	</struct>
+	<constraints>
+		<rule>
+			<imp>
+				<var>CNNAE</var>
+				<var>ImagesState</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>CNN</var>
+				<conj>
+					<var>ImagesState</var>
+					<var>FullyLabelledState</var>
+				</conj>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>ResNet</var>
+				<conj>
+					<var>ImagesState</var>
+					<var>FullyLabelledState</var>
+				</conj>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>LSTMAE</var>
+				<var>TimeSeriesState</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>QuantizeNN</var>
+				<var>NeuralNetworks</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>CNN</var>
+				<not>
+					<var>NovelAnomaliesEmergeInProd</var>
+				</not>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>ResNet</var>
+				<not>
+					<var>NovelAnomaliesEmergeInProd</var>
+				</not>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>SpectrogramState</var>
+				<disj>
+					<var>Spectrograms</var>
+					<conj>
+						<var>TimeSeries</var>
+						<var>SFFT_createSpectrograms</var>
+					</conj>
+				</disj>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>TimeSeriesState</var>
+				<var>TimeSeries</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>QuantizeNN</var>
+				<var>microcontroller</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>FullyLabelledState</var>
+				<disj>
+					<var>FullyLabelled</var>
+					<conj>
+						<var>PartiallyLabelled</var>
+						<var>augmentation</var>
+					</conj>
+				</disj>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>UnlabelledState</var>
+				<disj>
+					<conj>
+						<disj>
+							<var>FullyLabelled</var>
+							<var>PartiallyLabelled</var>
+						</disj>
+						<var>removal</var>
+					</conj>
+					<var>Unlabelled</var>
+				</disj>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>PartiallyLabelledState</var>
+				<disj>
+					<var>PartiallyLabelled</var>
+					<conj>
+						<var>FullyLabelled</var>
+						<var>Decimation</var>
+					</conj>
+				</disj>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>NormalizedDataState</var>
+				<disj>
+					<var>NormalizedData</var>
+					<conj>
+						<not>
+							<var>NormalizedData</var>
+						</not>
+						<var>NormalizeData</var>
+					</conj>
+				</disj>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>DS1_motor_vibration_acquisition_error</var>
+				<conj>
+					<var>TimeSeries</var>
+					<conj>
+						<not>
+							<var>NormalizedData</var>
+						</not>
+						<var>Unlabelled</var>
+					</conj>
+				</conj>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP1_motor_vibration_acquisition_error</var>
+				<var>DS1_motor_vibration_acquisition_error</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP1_motor_vibration_acquisition_error</var>
+				<var>pointAnomaly</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>NB1_motor_vibration_acquisition_error</var>
+				<var>LSTMAE</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>NB1_motor_vibration_acquisition_error</var>
+				<var>MinMaxScaler</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>LSTMAE</var>
+				<not>
+					<var>QuantizeNN</var>
+				</not>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP1_motor_vibration_acquisition_error</var>
+				<var>NB1_motor_vibration_acquisition_error</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>DS2_electrical_engine_sound_anomaly_detection</var>
+				<var>PartiallyLabelled</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>DS2_electrical_engine_sound_anomaly_detection</var>
+				<var>TimeSeries</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>DS2_electrical_engine_sound_anomaly_detection</var>
+				<not>
+					<var>NormalizedData</var>
+				</not>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP2_electrical_engine_sound_anomaly_detection</var>
+				<var>NovelAnomaliesEmergeInProd</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP2_electrical_engine_sound_anomaly_detection</var>
+				<var>patternAnomaly</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>NB2_electrical_engine_sound_anomaly_detection</var>
+				<var>SFFT_createSpectrograms</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>NB2_electrical_engine_sound_anomaly_detection</var>
+				<var>MinMaxScaler</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>NB2_electrical_engine_sound_anomaly_detection</var>
+				<var>CNNAE</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP2_electrical_engine_sound_anomaly_detection</var>
+				<var>NB2_electrical_engine_sound_anomaly_detection</var>
+			</imp>
+		</rule>
+		<!-- <rule>
+			<imp>
+				<var>DS3_motor_vibrations_bearing_defect</var>
+				<var>TimeSeries</var>
+			</imp>
+		</rule> -->
+		<!-- <rule>
+			<imp>
+				<var>DS3_motor_vibrations_bearing_defect</var>
+				<var>PartiallyLabelled</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>DS3_motor_vibrations_bearing_defect</var>
+				<not>
+					<var>NormalizedData</var>
+				</not>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP3_motor_vibrations_bearing_defect</var>
+				<var>NovelAnomaliesEmergeInProd</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP3_motor_vibrations_bearing_defect</var>
+				<var>patternAnomaly</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>NB3_motor_vibrations_bearing_defect</var>
+				<var>SFFT_createSpectrograms</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>NB3_motor_vibrations_bearing_defect</var>
+				<var>MinMaxScaler</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>NB3_motor_vibrations_bearing_defect</var>
+				<var>CNNAE</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP3_motor_vibrations_bearing_defect</var>
+				<var>NB3_motor_vibrations_bearing_defect</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>DS4_washing_machine_engine</var>
+				<var>PartiallyLabelled</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>DS4_washing_machine_engine</var>
+				<var>TimeSeries</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>DS4_washing_machine_engine</var>
+				<not>
+					<var>NormalizedData</var>
+				</not>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP4_washing_machine_engine_defect</var>
+				<var>patternAnomaly</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP4_washing_machine_engine_defect</var>
+				<var>NovelAnomaliesEmergeInProd</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP4_washing_machine_engine_defect</var>
+				<var>washing_machine_defect_NB</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>washing_machine_defect_NB</var>
+				<var>SFFT_createSpectrograms</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>washing_machine_defect_NB</var>
+				<var>MinMaxScaler</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>washing_machine_defect_NB</var>
+				<var>CNNAE</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>washing_machine_defect_NB</var>
+				<var>QuantizeNN</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>wafer_manufacturing_anomaly_detection_NB</var>
+				<var>MinMaxScaler</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>wafer_manufacturing_anomaly_detection_NB</var>
+				<var>ResNet</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>Wafer_manufacturing_anomaly_detection_APP</var>
+				<var>wafer_manufacturing_anomaly_detection_NB</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>Wafer_manufacturing_anomaly_detection_APP</var>
+				<var>wafer_manufacturing_DS</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>wafer_manufacturing_DS</var>
+				<var>FullyLabelled</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>wafer_manufacturing_DS</var>
+				<var>TimeSeries</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>wafer_manufacturing_DS</var>
+				<not>
+					<var>NormalizedData</var>
+				</not>
+			</imp>
+		</rule> -->
+		<rule>
+			<imp>
+				<var>XP2_electrical_engine_sound_anomaly_detection</var>
+				<var>DS2_electrical_engine_sound_anomaly_detection</var>
+			</imp>
+		</rule>
+		<!-- <rule>
+			<imp>
+				<var>XP3_motor_vibrations_bearing_defect</var>
+				<var>DS3_motor_vibrations_bearing_defect</var>
+			</imp>
+		</rule>
+		<rule>
+			<imp>
+				<var>XP4_washing_machine_engine_defect</var>
+				<var>DS4_washing_machine_engine</var>
+			</imp>
+		</rule> -->
+		<rule>
+			<imp>
+				<var>XP2_electrical_engine_sound_anomaly_detection</var>
+				<not>
+					<var>microcontroller</var>
+				</not>
+			</imp>
+		</rule>
+		<!-- <rule>
+			<imp>
+				<var>XP3_motor_vibrations_bearing_defect</var>
+				<not>
+					<var>microcontroller</var>
+				</not>
+			</imp>
+		</rule> -->
+	</constraints>
+</featureModel>

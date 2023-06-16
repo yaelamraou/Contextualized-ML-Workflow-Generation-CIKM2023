@@ -1,0 +1,55 @@
+{
+  "Train": [
+    "# Model training\n",
+    "# Algo/CNN\n",
+    "\n",
+    "def CNN_classifier(input_shape):\n",
+    "    model = Sequential()\n",
+    "    model.add(Conv2D(32, (3, 3), activation='relu', input_shape=input_shape))\n",
+    "    model.add(MaxPooling2D((2, 2)))\n",
+    "    model.add(Conv2D(64, (3, 3), activation='relu'))\n",
+    "    model.add(MaxPooling2D((2, 2)))\n",
+    "    model.add(Conv2D(128, (3, 3), activation='relu'))\n",
+    "    model.add(MaxPooling2D((2, 2)))\n",
+    "    model.add(Flatten())\n",
+    "    model.add(Dense(128, activation='relu'))\n",
+    "    model.add(Dropout(0.5))\n",
+    "    model.add(Dense(64, activation='relu'))\n",
+    "    model.add(Dropout(0.5))\n",
+    "    model.add(Dense(2, activation='softmax'))\n",
+    "    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])\n",
+    "    return model\n",
+    "\n",
+    "input_shape = train_images[0].shape\n",
+    "clf = CNN_classifier(input_shape)\n",
+    "\n",
+    "def clf_train(obj, train_images, train_labels, epochs, batch_size):\n",
+    "    return obj.fit(train_images, train_labels, epochs, batch_size)\n",
+    "\n",
+    "model = clf_train(clf, train_images, train_labels, epochs=10, batch_size=32)\n"
+  ],
+  "Valid": [
+    "# Validation Prediction\n",
+    "# Algo/CNN\n",
+    "\n",
+    "def clf_predict(obj, valid_images):\n",
+    "    return obj.predict(valid_images)\n",
+    "\n",
+    "y_pred_valid = clf_predict(clf, valid_images)\n"
+  ],
+  "Test": [
+    "# Prediction\n",
+    "# Algo/CNN\n",
+    "\n",
+    "def clf_predict(obj, test_images):\n",
+    "    return obj.predict(test_images)\n",
+    "\n",
+    "y_pred = clf_predict(clf, test_images)\n"
+  ],
+  "Imports": [
+    "import tensorflow as tf\n",
+    "from tensorflow.keras.utils import to_categorical\n",
+    "from tensorflow.keras.models import Sequential\n",
+    "from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout\n"
+  ]
+}

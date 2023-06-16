@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="">
+<head>
+    <meta charset="UTF-8">
+    <title>SPLC Application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/vanderlee/tristate/master/jquery.tristate.js"></script>
+    <link rel="stylesheet" href="./styles/gui.css"/>
+    <link rel="stylesheet" href="./styles/tabs.css">
+</head>
+
+<!-- Variables by default -->
+<script>
+    let defaultColor = '#29668CFF';
+
+    let initialize = 'Initialize';
+    let initialData = 'InitialData';
+    let initialProblem = 'InitialProblem';
+    let solution = 'Solution';
+    let applications = 'Application';
+    let sources = 'Sources';
+    //To deal with unexpected features, it's not an entrypoint as we don't look for this feature.
+    let others = 'Others';
+    //To deal with different other entry points
+    let states = "states";
+    let otherEntryPoints = [states];
+    const entryPoints = [initialData, initialProblem, solution, applications, sources];
+        let fmFileContent = "";
+    let xml4FM = "";
+
+    let activatedFeatures = [];
+    let deactivatedFeatures = [];
+    let newactivatedFeatures = [];
+    let newdeactivatedFeatures = [];
+    let diffDeactivatedFeatures = [];
+    let diffActivatedFeatures = [];
+    let featuresNoMoreActive = [];
+
+    let constraints =  new Map();
+
+    let UIAnnotations = "";
+</script>
+
+<body>
+
+<div class="menu">
+    <button class="tablink" onclick="openTab(initialize+'Section', this, '#54320d')" id="defaultOpen">Initialize 
+    </button>
+    <button class="tablink" id="InitialDataButton" onclick="openTab(initialData+'Section', this, '#29668c')">
+        Initial Data
+    </button>
+    <button class="tablink" onclick="openTab(initialProblem+'Section', this, '#4a32a8')">Business Requirements</button>
+    <button class="tablink" onclick="openTab(solution+'Section', this, '#4a32a8')">ML Artifacts</button>
+    <button class="tablink" onclick="openTab(applications+'Section', this, '#4a32a8')">Past Experiments</button>
+    <button class="tablink" onclick="openTab(sources+'Section', this, '#54320d')">Sources</button>
+    <button class="tablink" onclick="openTab(others+'Section', this, '#54320d')">Others</button>
+</div>
+<p>
+<div id="GlobalInformation" class="Global">
+</div>
+
+
+<div id='InitializeSection' class="tabcontent">
+    <h1>Initialization</h1>
+    <p class="comment">
+        To Initialize the configurator, you can:
+    <ul>
+        <li> - Generate a configurator from feature model IDE file (xml)</li>
+        <li> - Improve the visualization of the configurator with a description file (csv)</li>
+        <li> - Preselect criteria (features) from a previous configuration (xml)</li>
+        <li> - Export the current configuration, especially to save it for later (xml)</li>
+    </ul>
+    </p>
+    <div id="InitializeSub">
+    </div>
+
+    <hr class="new5">
+    <h2> Feature Model Selection </h2>
+    <h3> Copy/past here your FM or <strong>upload xml file</strong></h3>
+    <p class="comment">
+        Reference Feature Model can be downloaded
+        <a href="https://anonymous.4open.science/r/splc-artifact-files/static/illustration_test_cases/illustrative_fm_scenario1.xml">
+            here</a></p>
+    <label for="fmxml"></label><textarea id="fmxml" cols="100" rows="10"></textarea>
+    <p></p>
+    <input type="file" name="inputFMfile" id="inputFMfile">
+    <br>
+    <button id="btn-fmload" class="buttonImportant">Generate the configurator</button>
+
+    <hr class="new5">
+    <h2> CSV File Selection (Not required)</h2>
+    <h5> To have a better visualization download the CSV file describing the FM</h5>
+    <!-- <p class="comment"> Reference CSV file can be downloaded
+        <a href="https://github.com/ROCKFlows/time-series-anomaly-detection-knowledge/blob/main/Knowledge%20base/FMKnowledge_last.csv">here</a>
+    </p> -->
+    <p>
+        <label>Choose an accompanying csv file (optional) for a better layout </label>
+    <p>
+        <input type="file" id="upload-csv" accept=".csv">
+    <p>
+        <button id="btn-upload-csv" class="buttonImportant">Generate the configurator with
+            questions
+        </button>
+
+    <hr class="new5">
+    <h2> Past Configuration </h2>
+    <h3> To speed up configuration you can use past configurations </h3>
+    <!-- <p class="comment"> Past configurations are available here </p> -->
+    <div>
+        <label for="configArea"></label><textarea id="configArea" cols="100" rows="10"></textarea>
+    </div>
+    <input type="file" name="inputConfigFile" id="inputConfigFile">
+    <button id="btn-configure" class="buttonImportant">Generate from configuration
+    </button>
+
+    <!-- TODO make div inactive and replace it when configuration is valid ...-->
+    <div id="exportConfigDiv">
+        <hr class="new5">
+        <h2> Export Configuration </h2>
+        <h3> To record current configuration </h3>
+
+        <div id="exportButtons">
+            <button id="exportConfigXML" class="buttonImportant"> Export Current Configuration</button>
+            <button id="generateNB" class="buttonImportant"> Generate Notebook </button>
+            <input type="button" id="download_btn" value="Download" />
+        </div>
+        
+        <div>
+            <label for="exportArea"></label><textarea id="exportArea" cols="100" rows="10"></textarea>
+        </div>
+    </div>
+    <p>
+    <!-- <div id="exportXP">
+        <hr class="new5">
+        <h2> Export Experimentation (work in progress) </h2>
+    </div> -->
+</div>
+
+<div id="InitialDataSection" class="tabcontent">
+    <h1>Initial Data</h1>
+    <p>Precise information about your dataset</p>
+    <div id="InitialDataSub"></div>
+</div>
+<div id="InitialProblemSection" class="tabcontent">
+    <h1>Business Requirements</h1>
+    <p>Precise information about your problem</p>
+    <div id="InitialProblemSub"></div>
+</div>
+<div id="SolutionSection" class="tabcontent">
+    <h1>ML Artifacts</h1>
+    <p>Elaborate your solution</p>
+    <div id="SolutionSub"></div>
+</div>
+<div id="ApplicationSection" class="tabcontent">
+    <h1>Past Experiments</h1>
+    <p>You can choose past experiments to speed up the setup </p>
+    <div id="ApplicationSub"></div>
+    <div id="clone_form">
+        <form id="cloning">
+            <label for="data">Choose a project to clone:</label>
+            <select name="clone options" id="select_clone">
+                <option value="">-- Select an option --</option>
+            </select>
+            <br>
+            <input type="button" id="clone_btn" value="Clone" />
+        </form>
+    </div>
+</div>
+<div id="SourcesSection" class="tabcontent">
+    <h1>Sources</h1>
+    <p>You can reduce the space to some sources, if you choose past experiments, you can get the author </p>
+    <div id="SourcesSub"></div>
+</div>
+
+<div id="OthersSection" class="tabcontent"><!-- style="display:none" >-->
+    <h1>others</h1>
+    <p> Only usefull if the FM does not conform to expected format </p>
+    <div id="OthersSub"></div>
+</div>
+
+
+</body>
+
+<!-- CSV File parser, from package -->
+<script src="./scripts/papaparse.min.js"></script>
+
+<!-- FM go through, custom -->
+<script src="./scripts/fm-parser.js"></script>
+
+<!-- Scripts that handles the parsing of FM and creation of constraints model and configurator -->
+<script src="./scripts/configuration.js"></script>
+<script src="./scripts/configuration-renderer.js"></script>
+<script src="./scripts/configurator.js"></script>
+<script src="./scripts/configuration-export.js"></script>
+<script src="./scripts/configuration-generate.js"></script>
+<script src="./scripts/constraint-solver.js"></script>
+<script src="./scripts/fm-loader-reader.js"></script>
+
+<!-- To manage tabs interactions -->
+<script src="./scripts/tabs-manager.js"></script>
+
+<!-- To read CSV FILE -->
+<script src="./scripts/read-csv.js"></script>
+
+<!-- To read past configuration -->
+<script src="./scripts/past-conf.js"></script>
+
+<!-- To visualise global Properties-->
+<script src="./scripts/global-properties-vis.js"></script>
+
+<!-- Checkboxes status-->
+<script src="./scripts/change-status.js"></script>
+
+<!-- Generate form select content and clone request -->
+<script src="./scripts/clone-form-manager.js"></script>
+
+
+</html>

@@ -1,0 +1,31 @@
+{
+  "Train": [
+    "# Model training\n",
+    "# Algo/RandomForest\n",
+    "\n",
+    "def clf_train(obj, x_data, y_data):\n",
+    "    return obj.fit(x_data, y_data)\n",
+    "\n",
+    "clf = RandomForestClassifier(max_depth=2, random_state=0)\n",
+    "model = clf_train(clf, x_train, y_train)"
+  ],
+  "Valid": [
+    "# Prediction\n",
+    "# Algo/RandomForest\n",
+    "\n",
+    "def clf_predict(obj, x_data):\n",
+    "    return obj.predict(x_data)\n",
+    "\n",
+    "y_pred_valid = clf_predict(clf, x_valid)"
+  ],
+  "Test": [
+    "# Prediction\n",
+    "# Algo/RandomForest\n",
+    "\n",
+    "def clf_predict(obj, x_data):\n",
+    "    return obj.predict(x_data)\n",
+    "\n",
+    "y_pred = clf_predict(clf, x_test)"
+  ],
+  "Imports": ["from sklearn.ensemble import RandomForestClassifier\n"]
+}

@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "last_generation": "2023-04-19",
+    "experiments_count": 3,
+    "notebook_count": 3
+  },
+  "experiments": {
+    "XP1_motor_vibration_acquisition_error": {
+      "path": "./static/illustration_test_cases/assets/experiments/XP1_motor_vibration_acquisition_error",
+      "notebook": "./static/illustration_test_cases/assets/experiment_notebooks/NB1_motor_vibration_acquisition_error.ipynb",
+      "dataset": "./static/illustration_test_cases/assets/dataset/DS1_motor_vibration_acquisition_error"
+    },
+    "XP2_electrical_engine_sound_anomaly_detection": {
+      "path": "./static/illustration_test_cases/assets/experiments/XP2_electrical_engine_sound_anomaly_detection",
+      "notebook": "./static/illustration_test_cases/assets/experiment_notebooks/NB2_electrical_engine_sound_anomaly_detection.ipynb",
+      "dataset": "./static/illustration_test_cases/assets/dataset/DS2_electrical_engine_sound_anomaly_detection"
+    },
+    "XP3_motor_vibrations_bearing_defect": {
+      "path": "./static/illustration_test_cases/assets/experiments/XP3_motor_vibrations_bearing_defect",
+      "notebook": "./static/illustration_test_cases/assets/experiment_notebooks/NB3_motor_vibrations_bearing_defect.ipynb",
+      "dataset": "./static/illustration_test_cases/assets/dataset/DS3_motor_vibrations_bearing_defect"
+    }
+  },
+  "notebooks": {
+    "NB1_motor_vibration_acquisition_error": {
+      "path": "./static/illustration_test_cases/assets/experiment_notebooks/NB1_motor_vibration_acquisition_error.ipynb"
+    },
+    "NB2_electrical_engine_sound_anomaly_detection": {
+      "path": "./static/illustration_test_cases/assets/experiment_notebooks/NB2_electrical_engine_sound_anomaly_detection.ipynb"
+    },
+    "NB3_motor_vibrations_bearing_defect": {
+      "path": "./static/illustration_test_cases/assets/experiment_notebooks/NB3_motor_vibrations_bearing_defect.ipynb"
+    }
+  }
+}
